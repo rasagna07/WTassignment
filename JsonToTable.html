@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+
+      th {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="demo"></div>
+    <script>
+      function fortable() {
+        fetch("college.json")
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (data) {
+            let header = Object.keys(data[0]);
+            let tablename = `<table>`;
+
+            tablename += `<tr>`;
+            for (let i = 0; i < header.length; i++) {
+              tablename += `<th>` + header[i] + `</th>`;
+            }
+            tablename += `</tr>`;
+
+            data.forEach(function(item ) {
+              tablename += `<tr>`;
+              for (let i = 0; i < header.length; i++) {
+                tablename += `<td>` + item[header[i]] + `</td>`;
+              }
+              tablename += "</tr>";
+            });
+            tablename += "</table>";
+
+            document.getElementById("demo").innerHTML = tablename;
+          });
+      }
+
+      fortable();
+    </script>
+  </body>
+</html>
